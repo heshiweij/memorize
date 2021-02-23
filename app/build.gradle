@@ -1,0 +1,156 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    defaultConfig {
+        applicationId "com.xju.memorize"
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0.1"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', "x86", "x86_64"
+        }
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+        lintOptions {
+            checkReleaseBuilds false
+            abortOnError false
+        }
+    }
+    // Butterknife requires Java 8.
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('memorize.keystore')
+            storePassword "686860"
+            keyAlias "memorize"
+            keyPassword "686860"
+        }
+    }
+    //使用uniapp时，需复制下面代码
+    /*代码开始*/
+    aaptOptions {
+        additionalParameters '--auto-add-overlay'
+        //noCompress 'foo', 'bar'
+        ignoreAssetsPattern "!.svn:!.git:.*:!CVS:!thumbs.db:!picasa.ini:!*.scc:*~"
+    }
+    /*代码结束*/
+}
+
+allprojects {
+    repositories {
+
+        google()
+        jcenter()
+        maven { url 'https://dl.bintray.com/umsdk/release' }
+    }
+}
+
+repositories {
+    mavenCentral()
+    google()
+    jcenter()
+    maven { url 'https://dl.bintray.com/umsdk/release' }
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.aar'])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.android.support:appcompat-v7:29.0.0'
+    implementation 'com.android.support:support-v4:29.0.0'//目前只有第三方客服SwipeRefreshLayout(下拉刷新)用到次包
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    //导入RxJava 和 RxAndroid
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    implementation 'io.reactivex.rxjava2:rxjava:2.x.y'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    //导入retrofit
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    //转换器，请求结果转换成Model
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    //配合Rxjava 使用
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+    //导入Gson 库
+    implementation 'com.google.code.gson:gson:2.8.5'
+    //图片加载框架
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    //banner加载
+    implementation 'com.youth.banner:banner:2.1.0'
+    //eventbus
+    implementation 'org.greenrobot:eventbus:3.0.0'
+    //65536
+    implementation 'com.android.support:multidex:1.0.3'
+    //友盟 u-app
+    implementation "com.umeng.umsdk:common:9.1.0"
+    implementation "com.umeng.umsdk:asms:1.1.3" // asms包依赖(必选)
+    implementation "com.umeng.umsdk:crash:0.0.4" // native crash包依赖(必选)
+
+    //recyclerview适配器
+    implementation 'com.zhy:base-rvadapter:3.0.3'
+    //布局
+    implementation 'com.google.android:flexbox:0.3.0-alpha3'
+    //视频播放
+    implementation 'com.shuyu:GSYVideoPlayer:7.1.6'
+    //微信分享和登录
+//    api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.3.1'
+    implementation 'com.scwang.smart:refresh-layout-kernel:2.0.1'      //核心必须依赖
+    implementation 'com.scwang.smart:refresh-header-classics:2.0.1'    //经典刷新头
+//    implementation  'com.scwang.smart:refresh-header-radar:2.0.1'       //雷达刷新头
+//    implementation  'com.scwang.smart:refresh-header-falsify:2.0.1'     //虚拟刷新头
+//    implementation  'com.scwang.smart:refresh-header-material:2.0.1'    //谷歌刷新头
+//    implementation  'com.scwang.smart:refresh-header-two-level:2.0.1'   //二级刷新头
+//    implementation  'com.scwang.smart:refresh-footer-ball:2.0.1'        //球脉冲加载
+    implementation 'com.scwang.smart:refresh-footer-classics:2.0.1'    //经典加载
+    implementation "com.facebook.fresco:fresco:1.10.0"
+    //客服
+    implementation 'com.meiqia:meiqiasdk:+'
+    //加载html
+    implementation 'org.sufficientlysecure:html-textview:4.0'
+    implementation files('libs/wechat.jar')
+    implementation 'com.jakewharton:butterknife:10.2.3'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
+
+    implementation 'com.azhon:appupdate:3.0.3'
+
+    // 友盟统计
+    // OAID目前为目前国内市场主流的Android Q设备标识，可根据需要选择。
+    // 友盟统计SDK
+//    implementation  'com.umeng.umsdk:common:9.3.3' // 版本号(必选)
+//    implementation  'com.umeng.umsdk:asms:1.1.4' // asms包依赖(必选)
+//    implementation 'com.umeng.umsdk:apm:1.1.0' // U-APM产品包依赖(必选)
+}
