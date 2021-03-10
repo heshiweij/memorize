@@ -4,9 +4,13 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.widget.RelativeLayout;
 
 import com.xju.memorize.R;
+import com.xju.memorize.base.BaseApplication;
+import com.xju.memorize.constant.Constant;
+import com.xju.memorize.util.SharedPreferencesUtil;
 import com.xju.memorize.util.StatusBarUtil;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,7 +37,13 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void run() {
-                intent = new Intent(SplashActivity.this, LoginActivity.class);
+                String token = SharedPreferencesUtil.getSharedPreferencesData(BaseApplication.getApp(), Constant.DEVICE_TOKEN_KEY);
+                if (TextUtils.isEmpty(token)) {
+                    intent = new Intent(SplashActivity.this, LoginActivity.class);
+                } else {
+                    intent = new Intent(SplashActivity.this, MainActivity.class);
+                }
+
                 startActivity(intent);
                 finish();
             }

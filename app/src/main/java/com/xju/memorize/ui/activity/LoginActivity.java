@@ -35,16 +35,6 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.login_btn)
     Button login_btn;
 
-    /**
-     * 手机号码
-     */
-    private CharSequence mPhoneStr;
-
-    /**
-     * 密码
-     */
-    private CharSequence mPasswordStr;
-
     @Override
     protected void initView() {
         super.initView();
@@ -79,10 +69,7 @@ public class LoginActivity extends BaseActivity {
                 }
 
                 // 手机号码登录
-//                invokeLoginPhone(phone, password);
-
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
+                invokeLoginPhone(phone, password);
                 break;
         }
     }

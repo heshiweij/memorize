@@ -17,4 +17,13 @@
         android:layout_height="1px"
         android:background="@color/split_line_background" />
 
+    <LinearLayout
+        android:id="@+id/ll_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+    </LinearLayout>
+
 </LinearLayout>

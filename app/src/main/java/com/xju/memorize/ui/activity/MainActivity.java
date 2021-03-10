@@ -2,6 +2,7 @@ package com.xju.memorize.ui.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -22,11 +23,13 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 import butterknife.OnClick;
 
 @SuppressLint({"NonConstantResourceId", "LongLogTag"})
+@RequiresApi(api = Build.VERSION_CODES.M)
 public class MainActivity extends BaseActivity {
 
     /**
@@ -97,8 +100,8 @@ public class MainActivity extends BaseActivity {
         // 隐藏 TopBar
         hideBaseTopBar();
 
-        // 激活首页
-        activeHomePage();
+        // 激活 "复习"
+        activeReviewPage();
     }
 
     @Override
@@ -107,13 +110,25 @@ public class MainActivity extends BaseActivity {
     }
 
     /**
-     * 激活 "首页"
+     * 激活 "复习"
      */
-    public void activeHomePage() {
+    public void activeReviewPage() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 review_ll.performClick();
+            }
+        }, Constant.JUMP_PAGE_DELAY);
+    }
+
+    /**
+     * 激活 "选择"
+     */
+    public void activeChoicePage() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                choice_ll.performClick();
             }
         }, Constant.JUMP_PAGE_DELAY);
     }

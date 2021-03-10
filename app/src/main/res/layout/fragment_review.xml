@@ -23,32 +23,36 @@
 
                 <!--            发音-->
                 <RelativeLayout
-                    android:orientation="vertical"
+                    android:id="@+id/rl_pronunciation"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp">
+                    android:layout_height="60dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tv_word"
-                        android:text="Hello"
-                        android:layout_centerHorizontal="true"
-                        android:textSize="24sp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text=""
+                        android:textSize="24sp" />
 
                     <LinearLayout
-                        android:layout_below="@id/tv_word"
-                        android:orientation="horizontal"
-                        android:layout_centerHorizontal="true"
+                        android:id="@+id/ll_word"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_word"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <TextView
-                            android:text="英"
+                            android:id="@+id/tv_pronunciation"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:text="" />
 
-                        <TextView
-                            android:text="[həˈləʊ]"
+                        <ImageView
+                            android:src="@mipmap/ic_sound"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 
@@ -58,22 +62,18 @@
 
                 <!--            释义-->
                 <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:paddingLeft="10dp"
                     android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:paddingBottom="10dp">
 
                     <TextView
+                        android:id="@+id/tv_translate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="int. 喂；哈罗，你好，您好" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="n. （Hello）（法）埃洛（人名）" />
+                        android:text="" />
 
                 </LinearLayout>
 
@@ -100,27 +100,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:orientation="vertical">
+                android:paddingBottom="10dp">
 
                 <TextView
+                    android:id="@+id/tv_example_sentence"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hello, Trish. I won't shake hands, because I'm filthy." />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="A moment later, Cohen picked up the phone. 'Hello'" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Very softly, she called out: 'Hello? Who's there?'" />
+                    android:text="" />
 
             </LinearLayout>
 
@@ -142,39 +131,21 @@
             </RelativeLayout>
 
             <!--                助记-内容-->
-            <LinearLayout
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:paddingBottom="10dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="say hello 打招呼；问好" />
+                <ImageView
+                    android:id="@+id/iv_picture"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_centerInParent="true" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="hello everyone 大家好" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="hello and welcome 欢迎莅临" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="hello again 回魂妻（电影名称）" />
-
-
-            </LinearLayout>
+            </RelativeLayout>
 
             <!--                词典-标题-->
             <RelativeLayout
@@ -189,7 +160,6 @@
                     android:layout_marginLeft="10dp"
                     android:text="词典"
                     android:textColor="@color/title_text_color" />
-
 
             </RelativeLayout>
 
@@ -324,6 +294,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/btn_known"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_light_green_8_radius"
@@ -331,6 +302,7 @@
             android:textColor="@color/white" />
 
         <Button
+            android:id="@+id/btn_un_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -340,6 +312,7 @@
             android:textColor="@color/white" />
 
         <Button
+            android:id="@+id/btn_unknown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_light_red_8_radius"
@@ -347,5 +320,38 @@
             android:textColor="@color/white" />
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_mask"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请把英文发音和中文解释说出口"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="点击屏幕显示答案"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
 
 </RelativeLayout>

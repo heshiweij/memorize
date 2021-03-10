@@ -105,7 +105,7 @@ public class RetrofitFactory {
                         .method(originalRequest.method(), originalRequest.body());
                 String token = SharedPreferencesUtil.getSharedPreferencesData(BaseApplication.getApp(), Constant.DEVICE_TOKEN_KEY);
                 Log.d(TAG, "token: " + token + " url:" + originalRequest.url());
-                requestBuilder.addHeader("Authorization", String.format("%s", token));
+                requestBuilder.addHeader("Authorization", String.format("Bearer %s", token));
                 Request request = requestBuilder.build();
                 return chain.proceed(request);
             }

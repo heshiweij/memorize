@@ -102,13 +102,13 @@ public class OnSuccessAndFaultSub extends DisposableObserver<ResponseBody>
             } else if (e instanceof SSLHandshakeException) {
                 mOnSuccessAndFaultListener.onFault("安全证书异常:" + e.getMessage());
             } else if (e instanceof UnknownHostException) {
-                mOnSuccessAndFaultListener.onFault("网络开了小差，请稍后重试");
+                mOnSuccessAndFaultListener.onFault(e.getMessage());
             } else if (e instanceof HttpException) {
                 HttpException httpException = (HttpException) e;
                 int code = httpException.code();
 
                 if (code >= 500 && code < 600) {
-                    mOnSuccessAndFaultListener.onFault("服务器开了小差，请稍后重试");
+                    mOnSuccessAndFaultListener.onFault(e.getMessage());
                     return;
                 }
 
@@ -116,7 +116,7 @@ public class OnSuccessAndFaultSub extends DisposableObserver<ResponseBody>
                 ErrorBean errorBean = parseResponseMessage(httpException);
 
                 if (errorBean == null) {
-                    mOnSuccessAndFaultListener.onFault("服务器开了小差，请稍后重试");
+                    mOnSuccessAndFaultListener.onFault(e.getMessage());
                     return;
                 }
 
@@ -186,6 +186,7 @@ public class OnSuccessAndFaultSub extends DisposableObserver<ResponseBody>
 //                }
             }
         } catch (Exception e) {
+            mOnSuccessAndFaultListener.onFault(e.getMessage());
             e.printStackTrace();
             Log.e(TAG, e.getMessage());
         }
