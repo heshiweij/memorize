@@ -95,6 +95,9 @@ public class ReviewFragment extends BaseFragment {
      * 渲染单词、释义、音标等
      */
     private void applyWord() {
+        if (vocabularies == null || vocabularies.size() <= 0) {
+            return;
+        }
         if (vocabularies.get(index) == null) {
             return;
         }
@@ -129,6 +132,10 @@ public class ReviewFragment extends BaseFragment {
             R.id.ll_word
     })
     public void onClick(View view) {
+        if (vocabularies == null || vocabularies.size() <= 0) {
+            baseToast.showToast("加载数据异常,请稍后重试");
+            return;
+        }
         if (TextUtils.isEmpty(vocabularies.get(index).getWord())) {
             return;
         }
