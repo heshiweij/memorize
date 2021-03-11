@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.xju.memorize.R;
@@ -33,6 +34,9 @@ public class SettingsFragment extends BaseFragment {
 
     @BindView(R.id.iv_profile)
     ImageView iv_profile;
+
+    @BindView(R.id.tv_username)
+    TextView tv_username;
 
     @Override
     protected int getLayoutId() {
@@ -75,8 +79,13 @@ public class SettingsFragment extends BaseFragment {
         BaseSubscribe.userinfo(new OnSuccessAndFaultSub(new OnSuccessAndFaultListener() {
             @Override
             public void onSuccess(String result) {
-                UserInfoBean userInfoBean = GsonUtil.fromJson(result, UserInfoBean.class);
-                Glide.with(BaseApplication.getApp()).load(userInfoBean.getPortrait()).apply(GlideUtil.portraitOptions()).into(iv_profile);
+                UserInfoBean bean = GsonUtil.fromJson(result, UserInfoBean.class);
+
+                // 头像
+                Glide.with(BaseApplication.getApp()).load(bean.getPortrait()).apply(GlideUtil.portraitOptions()).into(iv_profile);
+
+                // 昵称
+                tv_username.setText(bean.getNickname());
             }
 
             @Override
